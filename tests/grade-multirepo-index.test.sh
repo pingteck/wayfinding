@@ -51,17 +51,21 @@ expect_red() {
 }
 
 # --- mutations, each a one-line edit to $TMP/idx.md -------------------------------------
+# Portable in-place edit. `sed -i ''` is BSD-only: GNU sed (Linux, CI) reads the '' as the
+# script or a filename, and the mutation silently does nothing — caught by the cmp no-op guard
+# above when this suite first ran on Ubuntu (2026-10-14). Write to a temp file and move instead.
+sedi() { sed "$@" "$TMP/idx.md" > "$TMP/t" && mv "$TMP/t" "$TMP/idx.md"; }
 m_drop_section()   { awk '/^## readme-only-svc/{s=1} /^## /&&!/readme-only-svc/{s=0} !s' "$TMP/idx.md" > "$TMP/t" && mv "$TMP/t" "$TMP/idx.md"; }
 m_drop_purpose()   { awk '!d && /^- \*\*Purpose:\*\*/ {sub(/^- \*\*Purpose:\*\* */,"  "); d=1} 1' "$TMP/idx.md" > "$TMP/t" && mv "$TMP/t" "$TMP/idx.md"; }
-m_drop_xrepo()     { sed -i '' 's/^- \*\*Cross-repo links:\*\* Publishes to/- **Notes:** Publishes to/' "$TMP/idx.md"; }
-m_one_sided()      { sed -i '' 's/exposes an HTTP API that `readme-only-svc` scrapes/exposes an HTTP API/' "$TMP/idx.md"; }
-m_stack_generic()  { sed -i '' 's/Go 1.25, embedded BoltDB./Go, an embedded key-value store./' "$TMP/idx.md"; }
+m_drop_xrepo()     { sedi 's/^- \*\*Cross-repo links:\*\* Publishes to/- **Notes:** Publishes to/'; }
+m_one_sided()      { sedi 's/exposes an HTTP API that `readme-only-svc` scrapes/exposes an HTTP API/'; }
+m_stack_generic()  { sedi 's/Go 1.25, embedded BoltDB./Go, an embedded key-value store./'; }
 m_phantom_repo()   { printf '\n## phantom-svc\n\n- **Purpose:** Invented.\n- **Role:** Invented.\n- **Entry points:** Invented.\n- **Cross-repo links:** None.\n- **Stack:** Go.\n' >> "$TMP/idx.md"; }
-m_no_edges()       { sed -i '' -e 's/`agents-only-svc`/the downstream service/g' -e 's/`readme-only-svc`/the exporter/g' -e 's/`redirect-svc`/the ingest service/g' "$TMP/idx.md"; }
-m_stack_wrong_sec(){ sed -i '' -e 's/Go 1.25, embedded BoltDB./Go 1.25, an embedded store./' \
-                                -e 's/Go 1.25, zerolog for structured output/Go 1.25, BoltDB and zerolog for structured output/' "$TMP/idx.md"; }
+m_no_edges()       { sedi -e 's/`agents-only-svc`/the downstream service/g' -e 's/`readme-only-svc`/the exporter/g' -e 's/`redirect-svc`/the ingest service/g'; }
+m_stack_wrong_sec(){ sedi -e 's/Go 1.25, embedded BoltDB./Go 1.25, an embedded store./' \
+                                -e 's/Go 1.25, zerolog for structured output/Go 1.25, BoltDB and zerolog for structured output/'; }
 m_drop_marker()    { awk '!d && /Layer-4 baseline only/ {d=1; next} 1' "$TMP/idx.md" > "$TMP/t" && mv "$TMP/t" "$TMP/idx.md"; }
-m_drop_h1()        { sed -i '' '1s/^# /XX /' "$TMP/idx.md"; }
+m_drop_h1()        { sedi '1s/^# /XX /'; }
 m_drop_summary()   { awk '!/^> /' "$TMP/idx.md" > "$TMP/t" && mv "$TMP/t" "$TMP/idx.md"; }
 
 echo "grade-multirepo-index.sh — can it fail?"

@@ -104,3 +104,9 @@ bash tests/run-all.sh
   workspaces and grades the output against frozen hand-authored oracles. It also
   records the RED baseline (what agents produce at these tasks *without* the skills), which
   is what establishes the skills' marginal value rather than merely their self-consistency.
+
+## Contributing
+
+Bug reports and fixes are welcome — see [`.github/CONTRIBUTING.md`](.github/CONTRIBUTING.md).
+The most useful report is a repo the detector classifies wrongly, with its
+`bash scripts/detect-mode.sh <dir>` output.
