@@ -1,0 +1,3 @@
+component app
+component lib
+root-component .

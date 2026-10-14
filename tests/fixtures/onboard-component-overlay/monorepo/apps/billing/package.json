@@ -1,0 +1,6 @@
+{
+  "name": "billing",
+  "private": true,
+  "dependencies": { "shared-ui": "workspace:*", "left-pad": "^1.3.0" },
+  "scripts": { "start": "node server.js" }
+}

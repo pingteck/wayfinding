@@ -1,0 +1,3 @@
+component pkg_a
+component pkg_b
+root-component .

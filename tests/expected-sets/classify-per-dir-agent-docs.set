@@ -1,0 +1,5 @@
+component packages/a
+component packages/b
+component web
+no-manifest-candidate docs
+no-manifest-candidate tests

@@ -1,0 +1,3 @@
+component packages/a
+component packages/b
+root-component .

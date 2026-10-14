@@ -1,0 +1,3 @@
+component crates/cli
+component crates/core
+component crates/legacy-extra

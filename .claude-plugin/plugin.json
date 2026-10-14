@@ -1,0 +1,5 @@
+{
+  "name": "wayfinding",
+  "version": "0.1.0",
+  "description": "Stand up and maintain a navigation index for a workspace — multi-repo, monorepo, or mixed (bootstrap / onboard / audit)."
+}

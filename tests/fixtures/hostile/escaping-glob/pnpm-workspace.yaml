@@ -1,0 +1,4 @@
+packages:
+  - "../../../etc/*"
+  - "pkg-a"
+  - "pkg-b"

@@ -1,0 +1,11 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/*",   # every crate under crates/ ...
+]
+# ... except these. Cargo `exclude` is SUBTRACTIVE, like pnpm's `!`.
+exclude = ["crates/legacy", "vendor-tool"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"

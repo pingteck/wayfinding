@@ -1,0 +1,4 @@
+component api
+component sdk
+component ui
+root-component .

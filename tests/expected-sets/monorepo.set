@@ -1,0 +1,8 @@
+component apps/api
+component apps/web
+component packages/nested-ws
+component packages/shared-ui
+component services/ingest
+no-manifest-candidate docs-site
+tooling .github
+tooling packages/eslint-config-fix

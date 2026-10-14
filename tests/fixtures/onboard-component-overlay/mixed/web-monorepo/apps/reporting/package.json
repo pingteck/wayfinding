@@ -1,0 +1,6 @@
+{
+  "name": "@acme/reporting",
+  "private": true,
+  "dependencies": { "@acme/ui": "workspace:*", "admin": "^2.0.0" },
+  "scripts": { "start": "node index.js" }
+}

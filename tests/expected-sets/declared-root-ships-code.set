@@ -1,0 +1,3 @@
+component apps/dashboard
+component packages/ui
+root-component .

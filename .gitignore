@@ -1,0 +1,30 @@
+.DS_Store
+
+# distribution bundles (built on demand, never committed)
+/dist/
+
+# generated indexes — this plugin's own output is never committed by the plugin,
+# and shouldn't be committed here by accident either
+/workspace-index.md
+/*.index.md
+
+# build-tool caches — an IDE or Java language server ran Gradle inside a test fixture once
+# (tests/fixtures/classify/gradle-groovy/.gradle/, 2026-10). Fixtures must stay byte-exact.
+.gradle/
+
+# ── PUBLISH-TIME EXCLUSION ─────────────────────────────────────────────────────
+# LOCAL-ONLY: the whole docs tree and CLAUDE.local.md. Everything else ships — including the
+# root CLAUDE.md, which holds contributor conventions only (touchstone's pattern, 2026-10-14).
+#   * docs/superpowers/ — historical specs/plans; carry origin-workspace detail.
+#   * docs/findings/ and CLAUDE.local.md — internal project memory: status, history, evidence.
+# tests/run-all.sh's "shipped files don't cite local docs" gate keeps every SHIPPED file from
+# pointing at these, and computes what ships from THIS file.
+#
+# ⚠️ THESE RULES DO NOTHING TO THE CURRENT REPO. These files are already TRACKED here, and
+# .gitignore never untracks anything. The exclusion becomes real only at the fresh `git init`
+# planned for publish. Pushing THIS repo to a remote would publish them regardless.
+#
+# Verify after the fresh init, before the first push:
+#   git ls-files | grep -E '^(docs/|CLAUDE\.local\.md$)'   # must print NOTHING
+/docs/
+/CLAUDE.local.md

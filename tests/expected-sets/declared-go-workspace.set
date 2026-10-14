@@ -1,0 +1,6 @@
+component compliance
+component documentation/examples/remote_storage
+component web/ui
+root-component .
+tooling .github
+tooling internal/tools

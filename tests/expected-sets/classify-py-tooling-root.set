@@ -1,0 +1,3 @@
+component packages/svc-a
+component packages/svc-b
+root-component .

@@ -1,0 +1,31 @@
+# Origin-workspace detail that must never appear in any file this repo SHIPS.
+#
+# One extended-regex alternation per line; `#` comments and blank lines ignored. Read by the
+# "no origin-workspace detail" gate in tests/run-all.sh, which scans EVERY FILE THAT WOULD SHIP
+# (computed from .gitignore) and skips only this file — the one place these strings are
+# supposed to exist. Local-only files (whatever .gitignore's publish-time block lists) are not scanned: they don't ship.
+#
+# WHY EVERYTHING THAT SHIPS, NOT JUST THE PAYLOAD. Until 2026-07-28 the gate scanned only
+# references/ skills/ scripts/ README.md .claude-plugin/, and `tests/` was deliberately exempt.
+# That exemption WAS the publish blocker: the multi-repo oracle was a real private workspace's
+# index and the grader hardcoded its repo names, so the repo could not go public. With those
+# rebuilt against tests/fixtures/layer2-chain/, nothing needs the exemption, and a gate that
+# covers everything is the only version that keeps it closed.
+#
+# Adding a name here is cheap. Do it whenever a real workspace's detail could plausibly get
+# pasted in.
+#
+# ⚠️ MEASUREMENT TRAP, cost an hour on 2026-07-28. Do NOT hand-verify this gate by typing a
+# `grep` into an interactive Claude Code / zsh session: `grep` there is a shell FUNCTION that
+# respects .gitignore, so it silently reports gitignored paths as clean. Inside a bash script
+# — which is how run-all.sh runs — `grep` is /usr/bin/grep, which does not. The gate is
+# therefore honest and the ad-hoc check is not, which is the dangerous way round. To verify by
+# hand, call `/usr/bin/grep` explicitly, or just run `bash tests/run-all.sh`.
+invoiceapp
+invoice-backend
+invoice-frontend
+invoice-reports
+supabase
+stripe
+paynow
+/Users/

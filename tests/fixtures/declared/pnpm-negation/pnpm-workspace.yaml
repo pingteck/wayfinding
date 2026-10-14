@@ -1,0 +1,7 @@
+packages:
+  - "apps/*"
+  - "docs/*"
+  - "packages/*"
+  - "!packages/turbo"
+  - "examples"
+  - "!examples/non-monorepo"

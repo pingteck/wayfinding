@@ -1,0 +1,4 @@
+go 1.25
+
+use ./svc-a
+use ./internal/nested/svc-c
